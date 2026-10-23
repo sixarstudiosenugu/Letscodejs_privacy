@@ -67,10 +67,10 @@
 
 <header>
   <h1>Privacy Policy</h1>
-  <p class="meta">LetsCodeJS by SIXARS Studios &nbsp;|&nbsp; Effective October 22, 2026</p>
+  <p class="meta">LetsCodeJS by SIXARS Studios &nbsp;|&nbsp; Effective October 23, 2026</p>
 </header>
 
-<p>LetsCodeJS is a mobile code editor for building and previewing projects on your phone in React, React Native, Vue, Angular or vanilla JavaScript. This policy explains what information the app handles, where it goes, and the choices you have. We wrote it to be read, so it avoids jargon where it can.</p>
+<p>LetsCodeJS is a mobile code editor for building and previewing projects on your phone in React, React Native, Vue, Angular or vanilla JavaScript. This policy explains what information the app handles, where it goes, and the choices you have. It also has an optional AI assistant that works only with an API key you provide. We wrote this policy to be read, so it avoids jargon where it can.</p>
 
 <nav aria-label="Contents">
   <p>On this page</p>
@@ -78,6 +78,7 @@
     <li><a href="#summary">The short version</a></li>
     <li><a href="#who">Who we are</a></li>
     <li><a href="#on-device">What stays on your device</a></li>
+    <li><a href="#ai">Optional AI assistant</a></li>
     <li><a href="#third-parties">Third-party services</a></li>
     <li><a href="#sharing">Features that share your work</a></li>
     <li><a href="#permissions">Permissions</a></li>
@@ -97,6 +98,7 @@
     <tr><th scope="row">Accounts</th><td>LetsCodeJS has no sign-up and no login of its own. We do not run a server that stores your data.</td></tr>
     <tr><th scope="row">Your code</th><td>Projects, files and assets are stored on your device. We cannot see them.</td></tr>
     <tr><th scope="row">Ads</th><td>The free version shows ads from Google AdMob, which collects device data (such as your advertising ID) to serve them.</td></tr>
+    <tr><th scope="row">AI assistant</th><td>Optional. If you add your own API key, your prompts and project code go directly from your device to the AI provider you choose. They never pass through us. <a href="#ai">Details</a>.</td></tr>
     <tr><th scope="row">Analytics</th><td>We do not use analytics or crash-reporting tools.</td></tr>
     <tr><th scope="row">Selling data</th><td>We do not sell your personal information.</td></tr>
     <tr><th scope="row">Optional sharing</th><td>If you use Expo device preview or sign in with an Expo token, parts of your project or token go to Expo. See <a href="#sharing">below</a>.</td></tr>
@@ -115,11 +117,46 @@
   <li><strong>Preferences:</strong> your chosen theme.</li>
   <li><strong>Purchase status:</strong> if you buy the one-time lifetime unlock, the app keeps a record of that purchase (product ID and transaction ID) in your device’s secure storage so it can unlock features without asking you again.</li>
   <li><strong>Expo access token (optional):</strong> if you choose to sign in to Expo, the token is saved in your device’s secure storage (Android Keystore or iOS Keychain).</li>
+  <li><strong>AI settings (optional):</strong> if you use the AI assistant, your API key for each provider, your chosen provider and model, and (for a custom server) its address, all in your device’s secure storage.</li>
+  <li><strong>AI chat history (optional):</strong> the last 40 messages of each project’s AI chat, as text only. This includes what you typed, which may include code or errors you pasted, and the AI’s explanations. Strings that look like API keys are automatically hidden. Chat history is deleted when you delete the project or tap “Clear chat”.</li>
+  <li><strong>AI notices:</strong> simple yes/no records of which first-use AI notices you accepted. For custom servers we store only a short hash of the address, not the address itself.</li>
 </ul>
 <p>Because we hold none of this, we cannot recover it if you uninstall the app or lose your phone. Export your projects if you want a backup.</p>
 
+<h2 id="ai">Optional AI assistant</h2>
+<p>LetsCodeJS includes an optional AI assistant. It is inactive until you add your own API key from a provider you choose. If you never add a key, the app makes no AI requests.</p>
+
+<h3>How it works</h3>
+<ul>
+  <li>You choose a provider: Anthropic (Claude), OpenAI, Google Gemini, or a custom server that follows the OpenAI format. You paste your own API key.</li>
+  <li>Requests go directly from your device to that provider, using your key. They do not pass through our servers. We never see your key, your prompts, your code or the replies.</li>
+  <li>A request is sent only when you tap Send (or confirm the first-use notice that follows your Send tap). Opening the AI screens, “Start with AI” and “Fix with AI” only fill in the input box. Nothing is sent until you tap Send.</li>
+  <li>The AI never changes your project on its own. You review each proposed change before it is applied, and you can undo it.</li>
+</ul>
+
+<h3>What is sent to the provider</h3>
+<ul>
+  <li>Your prompt, and for “Fix with AI” the error text from the preview.</li>
+  <li>The project name, framework, entry file and installed package names and versions.</li>
+  <li>The project’s file list, asset file names (never asset contents), and the contents of the files included in the request, up to about 60,000 characters. The app tells you which files were left out or shortened.</li>
+  <li>Your last few earlier prompts and the AI’s explanations from the same chat, as text.</li>
+  <li>Your API key, in a request header, so the provider can authorize the request.</li>
+</ul>
+<p>No device identifiers, advertising ID or analytics data are added by the AI feature. Because project code may be sent, do not include passwords, secret keys or personal information in files you send to an AI provider.</p>
+
+<h3>Providers, billing and their policies</h3>
+<ul>
+  <li>The provider you choose processes your request under its own terms and privacy policy: <a href="https://www.anthropic.com/legal/privacy" rel="noopener">Anthropic</a>, <a href="https://openai.com/policies/privacy-policy/" rel="noopener">OpenAI</a>, <a href="https://policies.google.com/privacy" rel="noopener">Google</a>. For a custom server, whoever runs that server receives your prompts and code, and we do not control it.</li>
+  <li>Some providers offer a free tier, and some paid plans may handle data differently. For example, on Google’s free tier your prompts and code may be used to improve Google products. Check your provider’s terms before sending private code.</li>
+  <li>API usage is billed by your provider if your plan is paid. This is separate from any ChatGPT or Claude subscription, which cannot be used in this app.</li>
+  <li>When an AI reply suggests npm packages, the app checks that each package name exists on the npm registry. Only the package names are sent.</li>
+</ul>
+
+<h3>Reporting a reply</h3>
+<p>Each AI reply has a “Report” option. It opens a pre-filled email addressed to us containing the reply text and the provider name. Nothing is sent unless you choose to send that email. If you do, we receive the reply text and your email address, and we use them only to review the report.</p>
+
 <h2 id="third-parties">Third-party services</h2>
-<p>LetsCodeJS relies on outside services for ads, payments and package downloads. Each has its own privacy policy, and we encourage you to read them.</p>
+<p>LetsCodeJS relies on outside services for ads, payments and package downloads, and for AI only if you choose to use it. Each has its own privacy policy, and we encourage you to read them.</p>
 
 <h3>Google AdMob (ads)</h3>
 <p>The free version of LetsCodeJS shows banner ads through Google AdMob. To serve and measure ads, Google may collect your device’s advertising ID, IP address, approximate location derived from the IP address, device and operating-system details, and information about how ads are displayed and interacted with. Ads may be personalized based on this data. Learn more in <a href="https://policies.google.com/technologies/ads" rel="noopener">Google’s advertising policy</a> and <a href="https://support.google.com/admob/answer/6128543" rel="noopener">how AdMob uses data from apps</a>.</p>
@@ -163,6 +200,9 @@
 <ul>
   <li><strong>On-device data</strong> stays until you delete a project, clear the app’s storage in Android settings, or uninstall the app.</li>
   <li><strong>Expo token:</strong> sign out of Expo inside the app to remove it from your device. You can also revoke the token in your Expo account settings.</li>
+  <li><strong>AI key:</strong> in AI Settings, tap “Remove key” to delete a saved key from your device. You can also revoke the key in your provider’s dashboard.</li>
+  <li><strong>AI chat history:</strong> tap “Clear chat”, delete the project, clear the app’s storage, or uninstall the app.</li>
+  <li><strong>Data held by your AI provider</strong> is controlled by that provider. Contact them to ask about their retention or deletion.</li>
   <li><strong>Expo Snack uploads</strong> are held by Expo, not by us. To ask for removal, contact Expo.</li>
   <li><strong>Ad data</strong> is held by Google under its own policies.</li>
 </ul>
@@ -170,12 +210,13 @@
 <h2 id="choices">Your choices and rights</h2>
 <ul>
   <li><strong>Ads:</strong> on Android, open <em>Settings &gt; Privacy &gt; Ads</em> (the path varies by device) to reset your advertising ID or opt out of ad personalization. You can also manage ad settings at <a href="https://myadcenter.google.com" rel="noopener">myadcenter.google.com</a>.</li>
+  <li><strong>AI:</strong> using the AI assistant is entirely your choice. You can remove your key at any time, and you decide what code to include before tapping Send.</li>
   <li><strong>Remove ads entirely:</strong> buy the one-time lifetime unlock. It is a single payment, not a subscription.</li>
   <li><strong>Legal rights:</strong> depending on where you live (for example under the Nigeria Data Protection Act 2023, the GDPR, or the CCPA), you may have rights to access, correct, delete or restrict the use of your personal information. Because we hold almost no personal information about you, most of it sits with Google, Expo and the other services above. Contact them for data they hold, or contact us and we will help where we can.</li>
 </ul>
 
 <h2 id="children">Children</h2>
-<p>LetsCodeJS is not directed at children under 13, and we do not knowingly collect personal information from them. If you believe a child has provided information through the app, contact us and we will help get it removed.</p>
+<p>LetsCodeJS is not directed at children under 13, and we do not knowingly collect personal information from them. If you believe a child has provided information through the app, contact us and we will help get it removed. The optional AI assistant needs an account with a third-party provider, and each provider sets its own minimum age. Do not use it if you are below the age your provider allows.</p>
 
 <h2 id="security">Security</h2>
 <p>We store sensitive items such as your Expo token and purchase record in your device’s secure storage. No method of storage or transmission is perfectly secure, so we cannot guarantee absolute security. Keeping your device locked and up to date helps protect everything in the app.</p>
